@@ -49,7 +49,13 @@ async function run() {
         // operations 
         // get all colleges 
         app.get('/colleges', async (req, res) => {
-            const colleges = await collegeCollection.find().toArray()
+            const limitStr = req.query.limit
+            let limit = 0
+            if (limitStr) {
+                limit = parseInt(limitStr)
+            }
+            console.log(limit)
+            const colleges = await collegeCollection.find().limit(limit).toArray()
             res.send(colleges)
         })
 
