@@ -45,6 +45,7 @@ async function run() {
         });
         const reviewCollection = client.db('education_master').collection('reviews')
         const collegeCollection = client.db('education_master').collection('colleges')
+        const galaryCollection = client.db('education_master').collection('galary')
 
         // operations 
         // get all colleges 
@@ -67,6 +68,17 @@ async function run() {
             res.send(college)
         })
 
+        // get galary images 
+        app.get('/galary', async (req, res) => {
+            const images = await galaryCollection.find().toArray()
+            res.send(images)
+        })
+
+        // get reviews 
+        app.get('/reviews', async (req, res) => {
+            const reviews = await reviewCollection.find().toArray()
+            res.send(reviews)
+        })
 
 
 
